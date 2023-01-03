@@ -1,11 +1,11 @@
 const express = require('express');
 
-const {getAllLaunches} = require('./launches.controller');
+const {httpGetAllLaunches} = require('./launches.controller');
 
 //import the function/controller froun launches.controllers
 
 
 const launchesRouter = express.Router();
-launchesRouter.get('/launches', getAllLaunches);
+launchesRouter.get('/launches', httpGetAllLaunches);
 
 module.exports = launchesRouter;
