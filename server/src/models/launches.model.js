@@ -5,7 +5,7 @@ const launch = {
     mission: 'Yoda Exploration II',
     rocket : 'Lightsaber Blue I',
     launchDate : new Date('August 17, 2050') ,
-    destination : 'Kepler-442 b',
+    target : 'Kepler-442 b',
     customer : ['Jedi', 'Sith', 'Galactic Empire'],
     upcoming: true,
     success: true
