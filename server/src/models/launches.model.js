@@ -8,12 +8,16 @@ const launch = {
     rocket : 'Lightsaber Blue I',
     launchDate : new Date('August 17, 2050') ,
     target : 'Kepler-442 b',
-    customer : ['Jedi', 'Sith', 'Galactic Empire'],
+    customers : ['Jedi', 'Sith', 'Galactic Empire'],
     upcoming: true,
     success: true
 }
 
 launches.set(launch.flightNumber, launch);
+
+function existsLaunchWithId(launchid) {
+    return launches.has(launchid);
+}
 
 function getAllLaunches () {
     return Array.from(launches.values());
@@ -32,7 +36,17 @@ function addNewLaunch (launch) {
         );
 }
 
+function abortLaunchById(launchID) {
+    //we can delete the data, but it's better to set it as false
+    const aborted = launches.get(launchID);
+    aborted.upcoming = false;
+    aborted.success = false;
+    return aborted
+}
+
 module.exports = {
     getAllLaunches,
-    addNewLaunch
+    addNewLaunch,
+    existsLaunchWithId,
+    abortLaunchById
 }
