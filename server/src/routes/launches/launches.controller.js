@@ -9,32 +9,32 @@ function httpGetAllLaunches(req,res) {
 
 function httpAddNewLaunch(req,res) {
     const launch = req.body;
-    const [inputValidation, errorMessage] = isInputLaunchValid(launch);
+    const {isValid, errorMessage} = validateLaunchInput(launch);
 
-    if (inputValidation) {
-        addNewLaunch(launch);
-        return res.status(201).json(launch);
-    } else {
-        res.status(400).json({
+    if (!isValid) {
+        return res.status(400).json({
             error : errorMessage
         })
     }
+  
+    addNewLaunch(launch);
+    return res.status(201).json(launch);
 }
 
-function isInputLaunchValid (launch) {
-    let inputValidation = true;
+function validateLaunchInput(launch) {
+    let isValid = true;
     let errorMessage = 'No Error';
     launch.launchDate = new Date(launch.launchDate);
 
     if (!launch.mission || !launch.rocket || !launch.launchDate || !launch.target) {
-       inputValidation = false
-       errorMessage = "Missing Required Launch Property";
+        isValid = false
+        errorMessage = "Missing Required Launch Property";
    } else if (isNaN(launch.launchDate)) {
-       inputValidation = false
-       errorMessage = "Invalid Launch Date";
+        isValid = false
+        errorMessage = "Invalid Launch Date";
    }
 
-   return [inputValidation, errorMessage];
+   return {isValid, errorMessage};
 }
 
 function httpAbortLaunch(req,res) {
