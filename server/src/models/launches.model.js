@@ -29,7 +29,7 @@ function addNewLaunch (launch) {
         lastFlightNumber, 
         Object.assign(launch, {
         flightNumber: lastFlightNumber,
-        customer : ['Jedi', 'Sith', 'Galactic Empire'],
+        customers : ['Jedi', 'Sith', 'Galactic Empire'],
         upcoming: true,
         success: true
         }) 
